@@ -18,12 +18,12 @@ jobs:
       - run: cmake --build .
       - run: cmake --build . --target test
       - run: cmake --build . --target package
+      - run: echo "RUN_NUMBER=${{ github.run_number }}"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RUN_NUMBER: ${{ github.run_number }}
         with:
           tag_name: ${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
